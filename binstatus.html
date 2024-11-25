@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ionic.example">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Dustbin Status</title>
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #252829;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .dustbin {
+            width: 120px;
+            height: 250px;
+            background-color: #ccc;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+        .lid {
+            width: 130px;
+            height: 20px;
+            background-color: #666;
+            border-radius: 10px;
+            position: absolute;
+            top: -20px;
+            left: -5px;
+        }
+        .fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transition: height 0.5s ease;
+            background-color: #4CAF50;
+            height: 70%; /* Default height */
+        }
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .back-button {
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body ng-controller="DustbinStatusCtrl">
+    <div class="header">Dustbin Status</div>
+
+    <div class="dustbin">
+        <div class="lid"></div>
+        <div class="fill" ng-style="{'height': percentage + '%'}"></div>
+        <div class="percentage">{{percentage}}%</div>
+    </div>
+
+    <a href="bin.html" class="back-button">Back to Map</a>
+
+    <script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
+    <script src="https://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    <script>
+        angular.module('ionic.example', ['ionic'])
+        .controller('DustbinStatusCtrl', function($scope) {
+            // Retrieve percentage from URL parameters
+            var urlParams = new URLSearchParams(window.location.search);
+            $scope.percentage = urlParams.get('percentage') || 0;
+
+            // Ensure percentage is a valid number
+            $scope.percentage = parseInt($scope.percentage, 10);
+        });
+    </script>
+</body>
+</html>
