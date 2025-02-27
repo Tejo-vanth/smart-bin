@@ -49,6 +49,3 @@ The **Smart Bin System** is a web-based application that helps users locate near
 ## Contributing
 Feel free to fork and submit pull requests!
 
-## License
-This project is licensed under the **MIT License**.
-
